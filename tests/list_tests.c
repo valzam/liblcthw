@@ -31,7 +31,7 @@ char *test_push_pop() {
 
   List_push(list, test3);
   mu_assert(List_last(list) == test3, "Wrong last value.");
-  mu_assert(List_count(list) == 2, "Wrong count on push.");
+  mu_assert(List_length(list) == 3, "Wrong count on push.");
 
   char *val = List_pop(list);
   mu_assert(val == test3, "Wrong value on pop.");
@@ -41,7 +41,7 @@ char *test_push_pop() {
 
   val = List_pop(list);
   mu_assert(val == test1, "Wrong value on pop.");
-  mu_assert(List_count(list) == -1, "Wrong count after pop.");
+  mu_assert(List_length(list) == 0, "Wrong count after pop.");
 
   return NULL;
 }
@@ -55,7 +55,7 @@ char *test_unshift() {
 
   List_unshift(list, test3);
   mu_assert(List_first(list) == test3, "Wrong last value.");
-  mu_assert(List_count(list) == 2, "Wrong count on unshift.");
+  mu_assert(List_length(list) == 3, "Wrong count on unshift.");
 
   return NULL;
 }
@@ -66,7 +66,7 @@ char *test_remove() {
 
   char *val = List_remove(list, list->first->next);
   mu_assert(val == test2, "Wrong removed element.");
-  mu_assert(List_count(list) == 1, "Wrong count after remove.");
+  mu_assert(List_length(list) == 2, "Wrong count after remove.");
   mu_assert(List_first(list) == test3, "Wrong first after remove.");
   mu_assert(List_last(list) == test1, "Wrong last after remove.");
 
@@ -74,14 +74,14 @@ char *test_remove() {
 }
 
 char *test_shift() {
-  mu_assert(List_count(list) != -1, "Wrong count before shift.");
+  mu_assert(List_length(list) != 0, "Wrong count before shift.");
 
   char *val = List_shift(list);
   mu_assert(val == test3, "Wrong value on shift.");
 
   val = List_shift(list);
   mu_assert(val == test1, "Wrong value on shift.");
-  mu_assert(List_count(list) == -1, "Wrong count after shift.");
+  mu_assert(List_length(list) == 0, "Wrong count after shift.");
 
   return NULL;
 }
@@ -98,7 +98,7 @@ char *test_join() {
   ListNode *result = list->first->next;
 
   mu_assert(result->value == test2, "Lists not joined properly");
-  mu_assert(list->count == 1, "Counter not updated properly");
+  mu_assert(list->length == 2, "Counter not updated properly");
   return NULL;
 }
 
@@ -120,7 +120,7 @@ char *test_split() {
   List_push(list, test1);
   List_push(list, test2);
   List_push(list, test3);
-  int position = 1;
+  int position = 2;
   List *left = List_create();
   List *right = List_create();
 

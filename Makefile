@@ -16,7 +16,7 @@ ifeq ($(OS),Ubuntu)
 endif
 
 # The Target Build
-all: $(TARGET) $(TESTS) tests
+all: clean $(TARGET) $(TESTS) tests
 
 dev: CFLAGS=-g -Wall -Isrc -Wall -Wextra $(OPTFLAGS)
 dev: all clean
