@@ -120,6 +120,8 @@ void List_join(List *root, List *addition) {
     check(root->first != NULL && addition->first, "One of the lists was empty");
 
     root->last->next = addition->first;
+    addition->first->prev = root->last;
+    root->count += addition->count + 1;
 
 error:
     return;

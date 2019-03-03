@@ -87,13 +87,18 @@ char *test_shift() {
 }
 
 char *test_join() {
+  List *list = List_create();
+  List *second_list = List_create();
+
   List_push(list, test1);
-  List_push(second_list, test1);
+  List_push(second_list, test2);
+  
   List_join(list, second_list);
 
   ListNode *result = list->first->next;
 
-  mu_assert(result->value, "test2 data");
+  mu_assert(result->value == test2, "Lists not joined properly");
+  mu_assert(list->count == 1, "Counter not updated properly");
   return NULL;
 }
 

@@ -16,10 +16,12 @@ ifeq ($(OS),Ubuntu)
 endif
 
 # The Target Build
-all: $(TARGET) tests
+all: $(TARGET) $(TESTS) tests
 
 dev: CFLAGS=-g -Wall -Isrc -Wall -Wextra $(OPTFLAGS)
 dev: all clean
+
+debug: clean $(TARGET) $(TESTS)
 
 $(TARGET): CFLAGS += -fPIC
 $(TARGET): build $(OBJECTS)
@@ -33,7 +35,7 @@ build:
 # The Unit Tests
 .PHONY: tests
 tests: LDLIBS += $(TARGET)
-tests: $(TESTS)
+tests: 
 	sh ./tests/runtests.sh
 
 valgrind:
